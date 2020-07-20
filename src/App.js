@@ -19,6 +19,10 @@ function App() {
           Learn React
         </a>
       </header>
+      <ul className='my-list'>
+        <li>hello Eric</li>
+        <li>{false ? '我爱学习' : '我不爱学习'}</li>
+      </ul>
     </div>
   );
 }
