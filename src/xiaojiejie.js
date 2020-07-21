@@ -24,11 +24,19 @@ class Xiaojiejie extends Component {
 
     componentDidMount() {
         console.log('componentDidMount----------虚拟dom挂载完成时刻');
+        axios.post('/postdata1')
+            .then((res) => {
+                console.log(res.data.list)
+                this.setState({
+                    list: res.data.list
+                })
+            })
+            .catch((error) => { console.log('axios 获取数据失败' + error) })
     }
 
 
     shouldComponentUpdate() {
-        console.log('1-shouldComponentUpdate----------应该更新组件');
+        // console.log('1-shouldComponentUpdate----------应该更新组件');
         // 在render之前
         return true;// false 就不会执行render了
     }
@@ -48,7 +56,7 @@ class Xiaojiejie extends Component {
     // }
 
     render() {
-        console.log('3-render----------组件挂载中');
+        // console.log('3-render----------组件挂载中');
         return (
             <Fragment>
                 <div>

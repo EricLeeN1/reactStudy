@@ -4,6 +4,7 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Xiaojiejie from './Xiaojiejie';
+import './data.js'
 
 //JSX javascript he xml
 ReactDOM.render(
