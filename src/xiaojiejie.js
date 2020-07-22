@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import './style.css'
 import XiaojiejieItem from './XiaojiejieItem';
+import Boss from './Boss';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Fragment 相当于vue的template
 class Xiaojiejie extends Component {
@@ -67,21 +69,34 @@ class Xiaojiejie extends Component {
                         className="input"
                         value={this.state.inputValue}
                         onChange={this.inputChange.bind(this)} />
-                    <button onClick={this.addList.bind(this)}>添加服务</button></div>
+                    <button onClick={this.addList.bind(this)}>添加服务</button>
+                </div>
+                <Boss />
                 <ul ref={ul => { this.ul = ul }}>
-                    {
-                        this.state.list.map((item, index) => {
-                            // {
-                            //     /* 加括号是为了更好的换行，可以不加 */
-                            //     /* XSS 警告*/
-                            // }
-                            return (
-                                // <li onClick={this.deleteItem.bind(this, index)} data-key={index + '-' + item} key={index + item} dangerouslySetInnerHTML={{ __html: item }}>
-                                // </li>
-                                <XiaojiejieItem list={this.state.list} deleteItem={this.deleteItem.bind(this)} key={index + item} content={item} index={index} />
-                            )
-                        })
-                    }
+                    <TransitionGroup>
+                        {
+                            this.state.list.map((item, index) => {
+                                // {
+                                //     /* 加括号是为了更好的换行，可以不加 */
+                                //     /* XSS 警告*/
+                                // }
+                                return (
+                                    // <li onClick={this.deleteItem.bind(this, index)} data-key={index + '-' + item} key={index + item} dangerouslySetInnerHTML={{ __html: item }}>
+                                    // </li>
+                                    <CSSTransition
+                                        timeout={1000}
+                                        classNames='boss-text'
+                                        unmountOnExit
+                                        appear={true}
+                                        appear={true}
+                                        key={index + item}
+                                    >
+                                        <XiaojiejieItem list={this.state.list} deleteItem={this.deleteItem.bind(this)} key={index + item} content={item} index={index} />
+                                    </CSSTransition>
+                                )
+                            })
+                        }
+                    </TransitionGroup>
                 </ul>
             </Fragment>
         );
